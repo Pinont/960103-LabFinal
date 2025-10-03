@@ -1,5 +1,6 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
 public class Main {
 
     // Pattern: Array
@@ -19,7 +20,7 @@ public class Main {
     };
 
     public static void main(String[] args) {
-
+        withdraw();
     }
 
     private static int getAccountId(String account) { // get account index from accounts array
@@ -52,4 +53,12 @@ public class Main {
         }
         return isSyntaxErr;
     }
+    static void withdraw() {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("How many withdraw : ");
+        Double money = scan.nextDouble();
+    }
+    
+    static void remaining() {
+        amount - money =
 }
