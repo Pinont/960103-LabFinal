@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -19,6 +21,7 @@ public class Main {
     };
 
     public static void main(String[] args) {
+        Doposit();
 
     }
 
@@ -52,4 +55,17 @@ public class Main {
         }
         return isSyntaxErr;
     }
+    // ระบบฝากเงิน
+    public static void Doposit() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("""
+                
+                Doposit System
+                """);
+        System.out.println("Total balance = " + getBalance(0) );
+
+
+
+    }
+
 }
