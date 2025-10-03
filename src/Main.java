@@ -108,11 +108,8 @@ public class Main {
                     break;
                 }
                 case 2: {
-                    System.out.print("Enter amount to deposit: ");
-                    int amount = scanner.nextInt();
-                    scanner.nextLine();
-//                    deposit(accountId, amount);
-                    break;
+                    Doposit(accountId);
+                    return;
                 }
                 case 3: {
                     System.out.print("Enter amount to withdraw: ");
@@ -194,14 +191,28 @@ public class Main {
         }
         return isSyntaxErr;
     }
+
+
+
     // ระบบฝากเงิน
-    public static void Doposit() {
+    public static void Doposit(int accountId) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 
                 Doposit System
                 """);
-        System.out.println("Total balance = " + getBalance(0) );
+        System.out.println("Your Total balance = " + getBalance(accountId) );
+        System.out.println("How to much money your want to doposit = ");
+        double dp = scanner.nextDouble();
+        balances[accountId] += dp;
+        System.out.println("");
+        System.out.println("Total Amount Received = " + getBalance(accountId));
+        System.out.println("");
+
+
+
+
+
 
 
 
