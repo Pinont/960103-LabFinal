@@ -137,7 +137,7 @@ public class Main {
                         break;
                     }
                     scanner.nextLine();
-//                    transfer(accountId, toAccountId, amount);
+                    transfer(accountId, toAccountId, amount);
                     break;
                 }
                 case 5: {
@@ -218,4 +218,28 @@ public class Main {
 
     }
 
+// ระบบโอนเงิน
+    public static void transfer(int fromAccountId, int toAccountId, double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid transfer amount.");
+            return;
+        }
+
+        if (balances[fromAccountId] < amount) {
+            System.out.println("Insufficient balance.");
+            return;
+        }
+
+        balances[fromAccountId] -= amount;
+        balances[toAccountId] += amount;
+
+        System.out.println("""
+                
+                Transfer Successful!
+                """);
+        System.out.println("Transferred " + amount + " from Account "
+                + accounts[fromAccountId] + " to Account " + accounts[toAccountId]);
+        System.out.println("Your new balance: " + balances[fromAccountId]);
+        System.out.println("");
+    }
 }
