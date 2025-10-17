@@ -197,7 +197,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         double balance = getBalance(acountId);
         double amount;
-        System.out.println("\t---------------------------------------");
+        System.out.println("\t--------------------------------------------");
         System.out.println("\t\t\t\tBalance is " + balance + "THB");
         do {
             System.out.println("");
@@ -205,30 +205,30 @@ public class Main {
             amount = scanner.nextDouble();
 
             if (amount <= 0) {
-                System.out.println("\t---------------------------------------");
+                System.out.println("\t----------------------------------------------");
                 System.out.println("\t\t=== !!! Enter again please !!! ===");
             } else if (amount > balance) {
-                System.out.println("\t---------------------------------------");
+                System.out.println("\t----------------------------------------------");
                 System.out.println("\t\t=== !!! Not enough balance !!! ===");
             }
         } while (amount <= 0 || amount > balance);
         if (confirmWithdraw(amount)) {
-            System.out.println("\tWithdrawal successful!");
-            System.out.println("\t---------------------------------------");
+            System.out.println("\t\t\tWithdrawal successful!");
+            System.out.println("\t----------------------------------------------");
         } else {
             System.out.println("\tTransaction canceled.");
-            System.out.println("\t---------------------------------------");
+            System.out.println("\t----------------------------------------------");
 
             return;
         }
 
         balances[acountId] -= amount;
         double remaining = balance - amount;
-        System.out.println("\t---------------------------------------");
+        System.out.println("\t----------------------------------------------");
         System.out.println("\t\t\t\tYou withdraw " + amount + "THB");
         System.out.println("");
-        System.out.println("\t\t\t\tThe Remaining Amount is " + remaining + " THB");
-        System.out.println("\t---------------------------------------");
+        System.out.println("\t\t\tThe Remaining Amount is " + remaining + " THB");
+        System.out.println("\t----------------------------------------------");
         getBalance(acountId);
     }
 
@@ -249,3 +249,4 @@ public class Main {
             }
         }
     }
+}
