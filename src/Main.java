@@ -147,9 +147,9 @@ public class Main {
                 }
                 default: {
                     System.out.println("""
-                    ===================================
-                     Invalid choice, Please try again.
-                    ===================================""");
+                            ===================================
+                             Invalid choice, Please try again.
+                            ===================================""");
                     break;
                 }
             }
@@ -186,12 +186,11 @@ public class Main {
         boolean isSyntaxErr = account.length() != 5;
         if (isSyntaxErr) {
             System.out.println("""
-                Account number must be 5 digits long
-                Please re-enter account number""");
+                    Account number must be 5 digits long
+                    Please re-enter account number""");
         }
         return isSyntaxErr;
     }
-
 
 
     // ระบบฝากเงิน
@@ -199,23 +198,46 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 
-                Doposit System
+                ==== Doposit System ====
                 """);
-        System.out.println("Your Total balance = " + getBalance(accountId) );
+        System.out.println("Your Total balance = " + getBalance(accountId));
         System.out.println("How to much money your want to doposit = ");
         double dp = scanner.nextDouble();
-        balances[accountId] += dp;
-        System.out.println("");
-        System.out.println("Total Amount Received = " + getBalance(accountId));
-        System.out.println("");
+        // เชคความถูกต้อง
+        if (dp > 0) {
+            balances[accountId] += dp;
+            System.out.println("");
+            System.out.println("Total Amount Received = " + getBalance(accountId));
+            System.out.println("");
+            Back(accountId);
 
-
-
-
-
-
-
-
+        } else if (dp == 0) {
+            System.out.println("");
+            System.out.println("==== Enter again please ====");
+            Doposit(accountId);
+        } else {
+            System.out.println("");
+            System.out.println("==== Enter again please ====");
+            Doposit(accountId);
+        }
     }
+//method ย้อนกลับ
+    public static void Back(int accountId) {
+        Scanner scanner = new Scanner(System.in);
+        String inputsting = "";
+        //รับค่า
+        System.out.println("=== Do you want to deposit again (yes/no) ===");
+        inputsting = scanner.next();
+        if (inputsting.equals("yes")) {
+            Doposit(accountId);
+        } else {
+            System.out.println("ฺ==== Back to LoginID ====");
+            System.out.println("");
 
+            login();
+            return;
+
+
+        }
+    }
 }
