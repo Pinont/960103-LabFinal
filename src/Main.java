@@ -109,11 +109,8 @@ public class Main {
                     break;
                 }
                 case 2: {
-                    System.out.print("Enter amount to deposit: ");
-                    int amount = scanner.nextInt();
-                    scanner.nextLine();
-//                    deposit(accountId, amount);
-                    break;
+                    Doposit(accountId);
+                    return;
                 }
                 case 3: {
                     withdraw(accountId);
@@ -138,7 +135,7 @@ public class Main {
                         break;
                     }
                     scanner.nextLine();
-//                    transfer(accountId, toAccountId, amount);
+                    transfer(accountId, toAccountId, amount);
                     break;
                 }
                 case 5: {
