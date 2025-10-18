@@ -26,9 +26,8 @@ public class Main {
         System.out.println("Welcome to the Banking System");
         System.out.print("""
                 Please select an option:
-                1. Create Account
-                2. Login
-                3. Exit
+                1. Login
+                2. Exit
                 Your choice:\s"""); // \s is adding 1 whitespace " "
         Scanner scanner = new Scanner(System.in);
         boolean landing = true;
@@ -38,15 +37,10 @@ public class Main {
             switch (choice) {
                 case 1: {
                     landing = false;
-                    // createAccount();
-                    break;
-                }
-                case 2: {
-                    landing = false;
                     login();
                     break;
                 }
-                case 3: {
+                case 2: {
                     landing = false;
                     System.out.println("Exiting...\n" +
                             "Thank you for using the Banking System");
@@ -94,8 +88,7 @@ public class Main {
                 "Welcome, " + account);
 
         boolean loggedIn = true;
-        while (loggedIn) {
-            System.out.print("""
+        System.out.print("""
                     Please select an option:
                     1. View Balance
                     2. Deposit
@@ -103,8 +96,8 @@ public class Main {
                     4. Transfer
                     5. Logout
                     Your choice:\s""");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+        int choice = scanner.nextInt();
+        while (loggedIn) {
             switch (choice) {
                 case 1: {
                     printBalance(accountId);
@@ -112,13 +105,10 @@ public class Main {
                 }
                 case 2: {
                     Doposit(accountId);
-                    return;
+                    break;
                 }
                 case 3: {
-                    System.out.print("Enter amount to withdraw: ");
-                    int amount = scanner.nextInt();
-                    scanner.nextLine();
-//                    withdraw(accountId, amount);
+                    withdraw(accountId);
                     break;
                 }
                 case 4: {
@@ -127,17 +117,17 @@ public class Main {
                     int toAccountId = getAccountId(toAccount);
                     if (accountId == toAccountId) {
                         System.out.println("Cannot transfer to the same account");
-                        break;
+                        continue;
                     }
                     if (toAccountId == -1) {
                         System.out.println("Invalid recipient account");
-                        break;
+                        continue;
                     }
                     System.out.print("Enter amount to transfer: ");
                     int amount = scanner.nextInt();
                     if (balances[accountId] < amount) {
                         System.out.println("Insufficient balance");
-                        break;
+                        continue;
                     }
                     scanner.nextLine();
                     transfer(accountId, toAccountId, amount);
@@ -145,8 +135,7 @@ public class Main {
                 }
                 case 5: {
                     loggedIn = false;
-//                    logout();
-                    break;
+                    continue;
                 }
                 default: {
                     System.out.println("""
@@ -156,6 +145,16 @@ public class Main {
                     break;
                 }
             }
+            System.out.print("""
+                    Please select an option:
+                    1. View Balance
+                    2. Deposit
+                    3. Withdraw
+                    4. Transfer
+                    5. Logout
+                    Your choice:\s""");
+            choice = scanner.nextInt();
+            scanner.nextLine();
         }
     }
 
@@ -194,6 +193,8 @@ public class Main {
         }
         return isSyntaxErr;
     }
+
+
 
     // ระบบฝากเงิน
     public static void Doposit(int accountId) {
@@ -236,6 +237,62 @@ public class Main {
         System.out.println("");
     }
 
+    static void withdraw(int acountId) {
+        Scanner scanner = new Scanner(System.in);
+        double balance = getBalance(acountId);
+        double amount;
+        System.out.println("\t--------------------------------------------");
+        System.out.println("\t\t\t\tBalance is " + balance + "THB");
+        do {
+            System.out.println("");
+            System.out.print("\t\t\tEnter amount to withdraw: ");
+            amount = scanner.nextDouble();
+
+            if (amount <= 0) {
+                System.out.println("\t----------------------------------------------");
+                System.out.println("\t\t=== !!! Enter again please !!! ===");
+            } else if (amount > balance) {
+                System.out.println("\t----------------------------------------------");
+                System.out.println("\t\t=== !!! Not enough balance !!! ===");
+            }
+        } while (amount <= 0 || amount > balance);
+        if (confirmWithdraw(amount)) {
+            System.out.println("\t\t\tWithdrawal successful!");
+            System.out.println("\t----------------------------------------------");
+        } else {
+            System.out.println("\tTransaction canceled.");
+            System.out.println("\t----------------------------------------------");
+
+            return;
+        }
+
+        balances[acountId] -= amount;
+        double remaining = balance - amount;
+        System.out.println("\t----------------------------------------------");
+        System.out.println("\t\t\t\tYou withdraw " + amount + "THB");
+        System.out.println("");
+        System.out.println("\t\t\tThe Remaining Amount is " + remaining + " THB");
+        System.out.println("\t----------------------------------------------");
+        getBalance(acountId);
+    }
+
+    static boolean confirmWithdraw(double amount) {
+        Scanner scanner = new Scanner(System.in);
+        char confirm;
+
+        while (true) {
+            System.out.print("Confirm withdraw " + amount + " THB? (Y/N): ");
+            confirm = scanner.next().charAt(0);
+
+            if (confirm == 'Y' || confirm == 'y') {
+                return true;
+            } else if (confirm == 'N' || confirm == 'n') {
+                return false;
+            } else {
+                System.out.println("Invalid input! Please enter Y or N.");
+            }
+        }
+    }
 
     // แสดงผลยอดเงิน พร้อมบันทึกเวลา
     public static void printBalance(int accountId) {
