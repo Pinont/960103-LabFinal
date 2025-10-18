@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -36,6 +38,7 @@ public class Main {
             switch (choice) {
                 case 1: {
                     landing = false;
+                    // createAccount();
                     break;
                 }
                 case 2: {
@@ -104,7 +107,7 @@ public class Main {
             scanner.nextLine();
             switch (choice) {
                 case 1: {
-                    System.out.println("Your balance is: " + getBalance(accountId));
+                    printBalance(accountId);
                     break;
                 }
                 case 2: {
@@ -192,8 +195,6 @@ public class Main {
         return isSyntaxErr;
     }
 
-
-
     // ระบบฝากเงิน
     public static void Doposit(int accountId) {
         Scanner scanner = new Scanner(System.in);
@@ -208,17 +209,9 @@ public class Main {
         System.out.println("");
         System.out.println("Total Amount Received = " + getBalance(accountId));
         System.out.println("");
-
-
-
-
-
-
-
-
     }
 
-// ระบบโอนเงิน
+    // ระบบโอนเงิน
     public static void transfer(int fromAccountId, int toAccountId, double amount) {
         if (amount <= 0) {
             System.out.println("Invalid transfer amount.");
@@ -241,5 +234,16 @@ public class Main {
                 + accounts[fromAccountId] + " to Account " + accounts[toAccountId]);
         System.out.println("Your new balance: " + balances[fromAccountId]);
         System.out.println("");
+    }
+
+
+    // แสดงผลยอดเงิน พร้อมบันทึกเวลา
+    public static void printBalance(int accountId) {
+        System.out.println("ยอดเงินคงเหลือ: " + getBalance(accountId) + " บาท ณ เวลา " + getCurrentTime());
+    }
+
+    private static String getCurrentTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.now().format(formatter);
     }
 }
