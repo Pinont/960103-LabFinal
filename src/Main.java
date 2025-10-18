@@ -2,19 +2,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     // Pattern: Array
     // accounts[0] = balances[0]
 
+    // Default accounts array
     private static String[] accounts = {
             "12345",
             "23456",
             "34567"
     };
 
+    // Default balances array
     private static double[] balances = { // Default accounts balances array
             1000,
             2000,
@@ -22,6 +22,7 @@ public class Main {
             4000
     };
 
+    // ระบบหน้าแรก: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     public static void main(String[] args) {
         System.out.println("Welcome to the Banking System");
         System.out.print("""
@@ -63,6 +64,7 @@ public class Main {
         }
     }
 
+    // ระบบล็อกอิน: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static void login() {
         Scanner scanner = new Scanner(System.in);
         String account = null;
@@ -158,11 +160,14 @@ public class Main {
         }
     }
 
+    // รับเลขที่บัญชีจากผู้ใช้: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static String getAccount(Scanner scanner) {
         System.out.print("Enter account number (Must be 5 digit long): ");
         return scanner.nextLine();
     }
 
+
+    // ดึงเลขที่บัญชี: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static int getAccountId(String account) { // get account index from accounts array
         if (isAccountSyntaxErr(account)) { // validate account: String is "", Account number length > 5
             System.out.println("Invalid account"); // print error message
@@ -177,6 +182,7 @@ public class Main {
         return -1; // return -1 for account not found
     }
 
+    // ดึงยอดเงินคงเหลือของบัญชี: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static double getBalance(int accountId) {
         if (accountId == -1) { // validate accountId
             System.out.println("Invalid account ID"); // print error message
@@ -184,6 +190,7 @@ public class Main {
         return balances[accountId]; // return balance of account from account index
     }
 
+    // เช็คความถูกต้องของเลขที่บัญชี: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static boolean isAccountSyntaxErr(String account) {
         boolean isSyntaxErr = account.length() != 5;
         if (isSyntaxErr) {
@@ -193,8 +200,6 @@ public class Main {
         }
         return isSyntaxErr;
     }
-
-
 
     // ระบบฝากเงิน
     public static void Doposit(int accountId) {
@@ -212,7 +217,7 @@ public class Main {
         System.out.println("");
     }
 
-    // ระบบโอนเงิน
+    // ระบบโอนเงิน: วริธทภัทร์ ธรรมธิ 682110191
     public static void transfer(int fromAccountId, int toAccountId, double amount) {
         if (amount <= 0) {
             System.out.println("Invalid transfer amount.");
@@ -237,6 +242,7 @@ public class Main {
         System.out.println("");
     }
 
+    // ระบบถอนเงิน: สายกลาง จะวะนะ 682110198
     static void withdraw(int acountId) {
         Scanner scanner = new Scanner(System.in);
         double balance = getBalance(acountId);
@@ -276,6 +282,7 @@ public class Main {
         getBalance(acountId);
     }
 
+    // ยืนยันการถอนเงิน: สายกลาง จะวะนะ 682110198
     static boolean confirmWithdraw(double amount) {
         Scanner scanner = new Scanner(System.in);
         char confirm;
@@ -294,11 +301,12 @@ public class Main {
         }
     }
 
-    // แสดงผลยอดเงิน พร้อมบันทึกเวลา
+    // แสดงผลยอดเงิน พร้อมบันทึกเวลา:
     public static void printBalance(int accountId) {
         System.out.println("ยอดเงินคงเหลือ: " + getBalance(accountId) + " บาท ณ เวลา " + getCurrentTime());
     }
 
+    // ดึงเวลาปัจจุบัน:
     private static String getCurrentTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.now().format(formatter);
