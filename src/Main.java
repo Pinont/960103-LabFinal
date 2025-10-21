@@ -25,11 +25,12 @@ public class Main {
     // ระบบหน้าแรก: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     public static void main(String[] args) {
         System.out.println("Welcome to the Banking System");
-        System.out.print("""
+        String prompt = """
                 Please select an option:
                 1. Login
                 2. Exit
-                Your choice:\s"""); // \s is adding 1 whitespace " "
+                Your choice:\s""";
+        System.out.print(prompt); // \s is adding 1 whitespace " "
         Scanner scanner = new Scanner(System.in);
         boolean landing = true;
         while (landing) {
@@ -49,15 +50,7 @@ public class Main {
                     break;
                 }
                 default: {
-                    System.out.print("""
-                            ===================================
-                             Invalid choice, Please try again.
-                            ===================================
-                            Please select an option:
-                            1. Create Account
-                            2. Login
-                            3. Exit
-                            Your choice:\s""");
+                    System.out.print(prompt);
                     break;
                 }
             }
