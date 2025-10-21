@@ -90,14 +90,16 @@ public class Main {
                 "Welcome, " + account);
 
         boolean loggedIn = true;
-        System.out.print("""
+        String prompt = """
                     Please select an option:
                     1. View Balance
                     2. Deposit
                     3. Withdraw
                     4. Transfer
-                    5. Logout
-                    Your choice:\s""");
+                    5. Show Banking Tip
+                    6. Logout
+                    Your choice:\s""";
+        System.out.print(prompt);
         int choice = scanner.nextInt();
         while (loggedIn) {
             switch (choice) {
@@ -136,6 +138,10 @@ public class Main {
                     break;
                 }
                 case 5: {
+                    showTip();
+                    break;
+                }
+                case 6: {
                     loggedIn = false;
                     continue;
                 }
@@ -147,14 +153,7 @@ public class Main {
                     break;
                 }
             }
-            System.out.print("""
-                    Please select an option:
-                    1. View Balance
-                    2. Deposit
-                    3. Withdraw
-                    4. Transfer
-                    5. Logout
-                    Your choice:\s""");
+            System.out.print(prompt);
             choice = scanner.nextInt();
             scanner.nextLine();
         }
@@ -201,20 +200,51 @@ public class Main {
         return isSyntaxErr;
     }
 
-    // ระบบฝากเงิน
+    // ระบบฝากเงิน: ศุภวิชญ์ อ้ายเสาร์ 682110196
     public static void Doposit(int accountId) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 
-                Doposit System
+                ==== Doposit System ====
                 """);
-        System.out.println("Your Total balance = " + getBalance(accountId) );
+        System.out.println("Your Total balance = " + getBalance(accountId));
         System.out.println("How to much money your want to doposit = ");
         double dp = scanner.nextDouble();
-        balances[accountId] += dp;
-        System.out.println("");
-        System.out.println("Total Amount Received = " + getBalance(accountId));
-        System.out.println("");
+        // เชคความถูกต้อง
+        if (dp > 0) {
+            balances[accountId] += dp;
+            System.out.println();
+            System.out.println("Total Amount Received = " + getBalance(accountId));
+            System.out.println();
+            Back(accountId);
+
+
+        } else if (dp == 0) {
+            System.out.println();
+            System.out.println("==== Enter again please ====");
+            Doposit(accountId);
+        } else {
+            System.out.println();
+            System.out.println("==== Enter again please ====");
+            Doposit(accountId);
+        }
+    }
+
+    // ศุภวิชญ์ อ้ายเสาร์ 682110196
+    public  static void Back (int accountId) {
+        Scanner scanner = new Scanner(System.in);
+        String backs = "";
+        System.out.println("==== Would you like to deposit money again ====");
+        System.out.println(" Yes / No ");
+        backs = scanner.nextLine();
+
+        if (backs.equalsIgnoreCase("Yes")) {
+            Doposit(accountId);
+        } else if (backs.equalsIgnoreCase("No")) {
+            System.out.println("Back to your choice");
+            System.out.println("===============================");
+            login();
+        }
     }
 
     // ระบบโอนเงิน: วริธทภัทร์ ธรรมธิ 682110191
@@ -239,7 +269,21 @@ public class Main {
         System.out.println("Transferred " + amount + " from Account "
                 + accounts[fromAccountId] + " to Account " + accounts[toAccountId]);
         System.out.println("Your new balance: " + balances[fromAccountId]);
-        System.out.println("");
+        System.out.println();
+    }
+
+    // วริธทภัทร์ ธรรมธิ 682110191
+    public static void showTip() {
+        String[] tips = {
+                "💡 Tip: Always check your balance before making transfers.",
+                "💡 Tip: Saving 10% of your income every month builds stability.",
+                "💡 Tip: Keep your account number private for security.",
+                "💡 Tip: Review your transactions regularly to prevent fraud.",
+                "💡 Tip: Withdraw only what you need to avoid overspending."
+        };
+
+        int randomIndex = (int)(Math.random() * tips.length);
+        System.out.println("\n" + tips[randomIndex] + "\n");
     }
 
     // ระบบถอนเงิน: สายกลาง จะวะนะ 682110198
@@ -250,7 +294,7 @@ public class Main {
         System.out.println("\t--------------------------------------------");
         System.out.println("\t\t\t\tBalance is " + balance + "THB");
         do {
-            System.out.println("");
+            System.out.println();
             System.out.print("\t\t\tEnter amount to withdraw: ");
             amount = scanner.nextDouble();
 
@@ -276,7 +320,7 @@ public class Main {
         double remaining = balance - amount;
         System.out.println("\t----------------------------------------------");
         System.out.println("\t\t\t\tYou withdraw " + amount + "THB");
-        System.out.println("");
+        System.out.println();
         System.out.println("\t\t\tThe Remaining Amount is " + remaining + " THB");
         System.out.println("\t----------------------------------------------");
         getBalance(acountId);
@@ -301,12 +345,12 @@ public class Main {
         }
     }
 
-    // แสดงผลยอดเงิน พร้อมบันทึกเวลา:
+    // แสดงผลยอดเงิน พร้อมบันทึกเวลา: กันต์ธีภพ ปันพรม 682110160
     public static void printBalance(int accountId) {
         System.out.println("ยอดเงินคงเหลือ: " + getBalance(accountId) + " บาท ณ เวลา " + getCurrentTime());
     }
 
-    // ดึงเวลาปัจจุบัน:
+    // ดึงเวลาปัจจุบัน: กันต์ธีภพ ปันพรม 682110160
     private static String getCurrentTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.now().format(formatter);
