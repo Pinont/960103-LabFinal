@@ -8,19 +8,19 @@ public class Main {
     // accounts[0] = balances[0]
 
     /*
-    * นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
-    * main, login, getAccount, getAccountId, getBalance, isAccountSyntaxErr
+    * นนท์นิพัทธ์ ตั้งโรจนขจร 682110178 (8 methods)
+    * getInt, getDouble, main, login, getAccount, getAccountId, getBalance, isAccountSyntaxErr
     *
-    * ศุภวิชญ์ อ้ายเสาร์ 682110196
+    * ศุภวิชญ์ อ้ายเสาร์ 682110196 (2 methods)
     * Doposit, Back
     *
-    * วริธทภัทร์ ธรรมธิ 682110191
+    * วริธทภัทร์ ธรรมธิ 682110191 (2 methods)
     * transfer, showTip
     *
-    * สายกลาง จะวะนะ 682110198
+    * สายกลาง จะวะนะ 682110198 (2 methods)
     * withdraw, confirmWithdraw
     *
-    * กันต์ธีภพ ปันพรม 682110160
+    * กันต์ธีภพ ปันพรม 682110160 (2 methods)
     * printBalance, getCurrentTime
     * */
 
@@ -39,6 +39,7 @@ public class Main {
             4000
     };
 
+    // รับค่า Double (block check error): นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static int getInt(Scanner scanner) {
         String input = scanner.nextLine();
         try {
@@ -49,6 +50,7 @@ public class Main {
         }
     }
 
+    // รับค่า Int (block check error): นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     private static double getDouble(Scanner scanner) {
         String input = scanner.nextLine();
         try {
