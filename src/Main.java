@@ -7,6 +7,23 @@ public class Main {
     // Pattern: Array
     // accounts[0] = balances[0]
 
+    /*
+    * นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
+    * main, login, getAccount, getAccountId, getBalance, isAccountSyntaxErr
+    *
+    * ศุภวิชญ์ อ้ายเสาร์ 682110196
+    * Doposit, Back
+    *
+    * วริธทภัทร์ ธรรมธิ 682110191
+    * transfer, showTip
+    *
+    * สายกลาง จะวะนะ 682110198
+    * withdraw, confirmWithdraw
+    *
+    * กันต์ธีภพ ปันพรม 682110160
+    * printBalance, getCurrentTime
+    * */
+
     // Default accounts array
     private static String[] accounts = {
             "12345",
@@ -317,7 +334,6 @@ public class Main {
         System.out.println();
         System.out.println("\t\t\tThe Remaining Amount is " + remaining + " THB");
         System.out.println("\t----------------------------------------------");
-        getBalance(acountId);
     }
 
     // ยืนยันการถอนเงิน: สายกลาง จะวะนะ 682110198
