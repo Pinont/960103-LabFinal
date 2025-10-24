@@ -50,6 +50,7 @@ public class Main {
                     break;
                 }
                 default: {
+                    System.out.println("Invalid choice. Try again.");
                     System.out.print(prompt);
                     break;
                 }
