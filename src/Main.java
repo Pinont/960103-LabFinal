@@ -39,6 +39,26 @@ public class Main {
             4000
     };
 
+    private static int getInt(Scanner scanner) {
+        String input = scanner.nextLine();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input, please enter a number.");
+            return -1;
+        }
+    }
+
+    private static double getDouble(Scanner scanner) {
+        String input = scanner.nextLine();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input, please enter a number.");
+            return -1;
+        }
+    }
+
     // ระบบหน้าแรก: นนท์นิพัทธ์ ตั้งโรจนขจร 682110178
     public static void main(String[] args) {
         System.out.println("Welcome to the Banking System");
@@ -51,8 +71,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean landing = true;
         while (landing) {
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = getInt(scanner);
             switch (choice) {
                 case 1: {
                     landing = false;
@@ -111,7 +130,7 @@ public class Main {
                     6. Logout
                     Your choice:\s""";
         System.out.print(prompt);
-        int choice = scanner.nextInt();
+        int choice = getInt(scanner);
         while (loggedIn) {
             switch (choice) {
                 case 1: {
@@ -139,12 +158,11 @@ public class Main {
                         continue;
                     }
                     System.out.print("Enter amount to transfer: ");
-                    int amount = scanner.nextInt();
+                    double amount = getDouble(scanner);
                     if (balances[accountId] < amount) {
                         System.out.println("Insufficient balance");
                         continue;
                     }
-                    scanner.nextLine();
                     transfer(accountId, toAccountId, amount);
                     break;
                 }
@@ -165,8 +183,7 @@ public class Main {
                 }
             }
             System.out.print(prompt);
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            choice = getInt(scanner);
         }
     }
 
@@ -220,7 +237,7 @@ public class Main {
                 """);
         System.out.println("Your Total balance = " + getBalance(accountId));
         System.out.println("How to much money your want to doposit = ");
-        double dp = scanner.nextDouble();
+        double dp = getDouble(scanner);
         // เชคความถูกต้อง
         if (dp > 0) {
             balances[accountId] += dp;
@@ -307,7 +324,7 @@ public class Main {
         do {
             System.out.println();
             System.out.print("\t\t\tEnter amount to withdraw: ");
-            amount = scanner.nextDouble();
+            amount = getDouble(scanner);
 
             if (amount <= 0) {
                 System.out.println("\t----------------------------------------------");
